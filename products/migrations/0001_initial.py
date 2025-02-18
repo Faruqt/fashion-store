@@ -5,27 +5,33 @@ import uuid
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Products',
+            name="Products",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('name', models.CharField(max_length=100)),
-                ('description', models.TextField()),
-                ('price', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('stock', models.IntegerField()),
-                ('is_published', models.BooleanField(default=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                ("name", models.CharField(max_length=100)),
+                ("description", models.TextField()),
+                ("price", models.DecimalField(decimal_places=2, max_digits=10)),
+                ("stock", models.IntegerField()),
+                ("is_published", models.BooleanField(default=False)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
         ),
     ]

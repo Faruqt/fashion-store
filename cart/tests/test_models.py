@@ -6,7 +6,6 @@ from products.models import Products
 
 @pytest.mark.django_db
 class TestCartModel:
-
     @pytest.fixture(autouse=True)
     def setup(self):
         self.user1 = Users.objects.create_user(

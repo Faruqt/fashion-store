@@ -3,7 +3,14 @@ URL configuration for the auth app.
 """
 
 from django.urls import path
-from .views import *
+from .views import (
+    login_user,
+    create_user,
+    create_admin,
+    logout_user,
+    refresh_token,
+    change_password,
+)
 
 urlpatterns = [
     path("login", login_user, name="auth-login"),

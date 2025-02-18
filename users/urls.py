@@ -3,7 +3,7 @@ URL configuration for the users app.
 """
 
 from django.urls import path
-from .views import *
+from .views import get_users, get_user, update_user, delete_user
 
 urlpatterns = [
     path("", get_users, name="users-list"),  # GET /api/users/

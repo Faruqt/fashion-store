@@ -3,7 +3,15 @@ URL configuration for the products app.
 """
 
 from django.urls import path
-from .views import *
+from .views import (
+    get_all_products,
+    get_products,
+    create_product,
+    get_product,
+    change_product_status,
+    update_product,
+    delete_product,
+)
 
 urlpatterns = [
     path("", get_all_products, name="products-list"),  # GET /api/products/

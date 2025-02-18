@@ -17,7 +17,7 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-from .views import *
+from .views import welcome
 from error_handler import views
 
 urlpatterns = [

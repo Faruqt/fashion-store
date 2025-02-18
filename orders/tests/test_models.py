@@ -7,7 +7,6 @@ from orders.models import Orders, OrderItem
 
 @pytest.mark.django_db
 class TestOrderModel:
-
     @pytest.fixture(autouse=True)
     def setup(self):
         self.user1 = Users.objects.create_user(

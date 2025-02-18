@@ -3,7 +3,7 @@ URL configuration for the cart app.
 """
 
 from django.urls import path
-from .views import *
+from .views import get_cart, get_cart_item, add_to_cart, remove_from_cart
 
 urlpatterns = [
     path("", get_cart, name="cart-list"),  # GET /api/cart/
