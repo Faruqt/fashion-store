@@ -33,6 +33,7 @@ Thumbs.db
 # Static and Media
 staticfiles/
 media/
+static/
 
 # Byte-compiled / packages
 *.egg-info/
