@@ -1,0 +1,41 @@
+# .gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*.$py.class
+*.pyo
+*.pyd
+*.swp
+*.swo
+core/__pycache__/
+.pytest_cache
+.ruff_cache
+
+# Virtual Environment
+venv/
+env/
+*.env
+
+# Django stuff
+db.sqlite3
+*.log
+postgres-data/
+
+# IDEs and Editors
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Static and Media
+staticfiles/
+media/
+
+# Byte-compiled / packages
+*.egg-info/
+*.egg
+dist/
+build/
