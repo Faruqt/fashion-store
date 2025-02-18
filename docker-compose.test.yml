@@ -26,8 +26,8 @@ services:
       - DATABASE_NAME=fashion_store_db_test
       - DATABASE_HOST=postgres-test
       - DATABASE_PORT=5432
-      - APP_SETTINGS = "test"
-      - APP_SECRET_KEY = "some-secret-key"
+      - APP_SETTINGS="test"
+      - APP_SECRET_KEY="some-secret-key"
     ports:
       - "8000:8000"
     volumes:
