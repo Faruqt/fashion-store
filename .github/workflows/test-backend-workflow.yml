@@ -5,16 +5,10 @@ on:
     branches: 
       - main
       - staging
-    paths:
-      - "backend-api/**"
-      - ".github/workflows/test-backend-workflow.yml"
   pull_request:
     branches: 
       - main
       - staging
-    paths:
-      - "backend-api/**"
-      - ".github/workflows/test-backend-workflow.yml"
 
 jobs:
   linter:
