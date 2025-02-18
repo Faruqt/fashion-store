@@ -1,0 +1,82 @@
+name: Test Backend on Pull Request
+
+on:
+  push:
+    branches: 
+      - main
+      - staging
+    paths:
+      - "backend-api/**"
+      - ".github/workflows/test-backend-workflow.yml"
+  pull_request:
+    branches: 
+      - main
+      - staging
+    paths:
+      - "backend-api/**"
+      - ".github/workflows/test-backend-workflow.yml"
+
+jobs:
+  linter:
+    name: Apply Ruff Linter to Backend
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+      - name: Install Ruff
+        run: |
+          cd backend-api
+          python -m pip install --upgrade pip
+          pip install ruff
+          echo "Ruff Installed"
+      - name: Apply Ruff Linter
+        run: |
+          cd backend-api
+          ruff check --fix --show-fixes
+          echo "Ruff linter check and fix applied" 
+          ruff format .
+          echo "File formatting applied"
+      - name: Commit formatted changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "automated code fixes and formatting by ruff"
+
+  test:
+    name: Test with pytest
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+
+      - name: Install Docker and Docker Compose
+        run: |
+          # Install Docker and Docker Compose
+          sudo apt-get update
+          sudo apt-get install -y docker.io
+          sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+          sudo chmod +x /usr/local/bin/docker-compose
+          docker-compose --version  # Verify installation
+
+      - name: Build and Start Services using Docker Compose
+        run: |
+          cd backend-api
+          docker-compose -f docker-compose.test.yml up -d  # Use a test-specific Docker Compose file for testing
+          
+      - name: Wait for PostgreSQL to be ready
+        run: |
+          docker exec backend-api_postgres_1 bash -c "until pg_isready -h localhost -p 5432; do sleep 1; done;"
+        
+      - name: Run Tests in Docker Containers
+        run: |
+          bash ./run-tests.sh
