@@ -1,0 +1,29 @@
+# Python
+*.py[cod]
+*.$pyc
+*.pytest_cache
+
+# Misc
+.DS_Store
+__pycache__
+
+# Testing / coverage reports
+.coverage*
+.tox
+
+#Virtual Environment
+env
+venv
+.env
+local.env
+
+# VS Code
+*.vscode
+**/.vscode/
+
+# Others
+Dockerfile
+docker-compose.yml
+README.md
+.gitignore
+.git

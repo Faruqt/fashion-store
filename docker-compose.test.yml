@@ -1,0 +1,42 @@
+version: '3.9'
+
+services:
+  postgres-test:
+    container_name: fashion-store-db-test
+    image: postgres:13.3-alpine
+    restart: "unless-stopped"
+    ports:
+      - 5433:5432
+    environment:
+      - POSTGRES_USER=fashion_store_db_user_test
+      - POSTGRES_PASSWORD=fashion_store_db_password_test
+      - POSTGRES_DB=fashion_store_db_test
+    networks:
+      - fashion-store-network-test
+
+  backend-test:
+    container_name: fashion-store-app-test
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - ENVIRONMENT=test
+      - DATABASE_USERNAME=fashion_store_db_user_test
+      - DATABASE_PASSWORD=fashion_store_db_password_test
+      - DATABASE_NAME=fashion_store_db_test
+      - DATABASE_HOST=postgres-test
+      - DATABASE_PORT=5432
+      - APP_SETTINGS = "test"
+      - APP_SECRET_KEY = "some-secret-key"
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    networks:
+      - fashion-store-network-test
+    depends_on:
+      - postgres-test
+
+networks:
+  fashion-store-network-test:
+    driver: bridge

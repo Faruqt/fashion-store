@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+    backend:
+        container_name: fashion-store-app
+        build:
+            context: .
+            args:
+                REQUIREMENTS_FILE: requirements.txt
+        environment:
+            - ENVIRONMENT=development
+        ports:
+            - 8000:8000
+        volumes:
+            - ./:/app
+        restart: "unless-stopped"
+        depends_on:
+            - postgres
+    postgres:
+        container_name: fashion-store-db
+        image: postgres:13.3-alpine
+        restart: "unless-stopped"
+        environment:
+            POSTGRES_DB: fashion_store_db
+            POSTGRES_USER: fashion_store_db_user
+            POSTGRES_PASSWORD: fashion_store_db_password
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+        ports:
+            - 5433:5432
+
+volumes:
+  postgres_data:
+    driver: local

@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+  backend:
+    container_name: fashion-store-app
+    build:
+      context: .
+      args:
+        REQUIREMENTS_FILE: prod.requirements.txt
+    ports:
+      - 80:8000
+    volumes:
+      - .:/app
+    restart: 'unless-stopped'
+    profiles:
+      - app
